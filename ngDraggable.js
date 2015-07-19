@@ -102,7 +102,6 @@ angular.module("ngDraggable", [])
                     };
                     /*
                      * When the element is clicked start the drag behaviour
-                     * On touch devices as a small delay so as not to prevent native window scrolling
                      */
                     var onpress = function(evt) {
                         if(! _dragEnabled)return;
@@ -116,17 +115,7 @@ angular.module("ngDraggable", [])
                             return;
                         }
 
-                        if(_hasTouch){
-                            cancelPress();
-                            _pressTimer = setTimeout(function(){
-                                cancelPress();
-                                onlongpress(evt);
-                            },100);
-                            $document.on(_moveEvents, cancelPress);
-                            $document.on(_releaseEvents, cancelPress);
-                        }else{
-                            onlongpress(evt);
-                        }
+                        onlongpress(evt);
 
                     };
 
